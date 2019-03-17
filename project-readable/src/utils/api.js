@@ -9,15 +9,15 @@ const AuthenticationHeader = {
 }
 
 export const fetchPosts = () => {
-    return axios.get(URL + '/posts', AuthenticationHeader).then(res => res.data)
+    return axios.get(URL + '/posts', AuthenticationHeader)
 }
 
 export const fetchPostById = (id) => {
-    return axios.get(URL + `/posts/${id}`, AuthenticationHeader).then(res => res.data)
+    return axios.get(URL + `/posts/${id}`, AuthenticationHeader)
 }
 
 export const fetchPostsByCategories = (category) => {
-    return axios.get(URL + `/${category}/posts`, AuthenticationHeader).then(res => res.data)
+    return axios.get(URL + `/${category}/posts`, AuthenticationHeader)
 }
 
 export const fetchPostComments = (id) => {
@@ -61,6 +61,5 @@ export const votePostById = (id, data) => {
 }
 
 export const fetchCategories = () => {
-    return axios.get(URL + '/categories', AuthenticationHeader).then(res => res.data)
-      .then(data => data.categories)
+    return axios.get(URL + '/categories', AuthenticationHeader)
 }  

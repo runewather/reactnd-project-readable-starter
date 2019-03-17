@@ -1,19 +1,22 @@
 import React, { Component, } from 'react'
-import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import './Button.css'
 
 class Button extends Component {
     render() {
         return (
-            <div style={{display: 'inline'}}>
-                <Link style={ {'textDecoration' : 'none'} } to={'/'}>
-                    <div className="Button">
-                        {this.props.name}
-                    </div>
-                </Link>
+            <div style={{display: 'inline'}} onClick={this.props.action}>
+                <div className="Button">
+                    {this.props.name}
+                </div>
             </div>            
         )
     }
+}
+
+Button.propTypes = {
+    action : PropTypes.func,
+    name : PropTypes.string
 }
 
 export default Button

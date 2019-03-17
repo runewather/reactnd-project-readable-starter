@@ -1,38 +1,46 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import AddPost from './components/AddPost'
 import AddPostButton from './components/AddPostButton'
 import PostList from './components/PostList'
 import PostPage from './components/PostPage'
-import Button from './components/Button'
+import CategoriesNav from './components/CategoriesNav'
+import LoadingBar from 'react-redux-loading'
+import { connect } from 'react-redux'
+import { handleFetchPosts } from './actions/PostActions'
+
 import './App.css'
 import './Normalize.css'
 
 class App extends Component {  
-  render() {        
+  render() {  
     return (
       <Router>
-          <div className="App">
+        <Fragment>
             <AddPostButton />
-            <header className="App-header">
-              <Link to={'/'} style={ { textDecoration: 'none', color: 'black'} }>
+            <LoadingBar />
+          <div className="App">                               
+            <header className="App-header">              
+              <Link to={'/'} onClick={ () => { this.props.dispatch(handleFetchPosts()) } } 
+              style={ { textDecoration: 'none', color: 'black'} }>
                 <h1 className="Title">React Blog</h1>   
-              </Link>      
-            </header>
-            <div className="Categories">
-              <Button name={"React"} />
-              <Button name={"Redux"} />
-              <Button name={"Udacity"} />
-            </div>
+              </Link>    
+              <CategoriesNav />
+            </header>            
             <div className="Wrapper">
               <Route exact path='/' component={PostList} />
               <Route exact path='/addPost' component={AddPost} />
-              <Route exact path='/postPage/:id' component={PostPage} />
+              <Route exact path='/postPage/:id' component={PostPage} />             
             </div>            
           </div>
+        </Fragment>          
       </Router>
     )
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  ...state
+})
+
+export default connect(mapStateToProps)(App);

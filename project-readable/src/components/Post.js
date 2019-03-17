@@ -1,39 +1,60 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import { FaThumbsUp } from 'react-icons/fa'
 import { FaThumbsDown } from 'react-icons/fa'
+import { FaCommentAlt } from 'react-icons/fa'
 import Button from './Button'
 import './Post.css'
 
 class Post extends Component {
-    render() {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            canEdit : false
+        }
+    }
+
+    formatPostDate = (timestamp) => {
+        let date = new Date(timestamp) 
+        return date.toLocaleDateString() + " " + date.toLocaleTimeString()
+    } 
+
+    render() {      
         return (
             <div className="Post">
                 <div className="Post-header">
-                    <Link to={`/postPage/1`} style={{'textDecoration' : 'none', 'color': 'black'}} >
-                        <h3 className="Post-title">Titulo do post</h3>
-                    </Link>
-                    <div>
-                        <Button name={"React"} style={{ }}/>
-                        <Button name={"React"} style={{ }}/>
-                        <Button name={"React"} style={{ }}/>
-                    </div>                    
+                    <Link to={`/postPage/${this.props.id}`} style={{'textDecoration' : 'none', 'color': 'black'}} >
+                        <h3 className="Post-title">{ this.props.title }</h3>
+                    </Link>                  
                 </div>                
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus porttitor ipsum sit amet commodo tincidunt. Integer a odio volutpat, rutrum nunc vitae, vestibulum ligula. In suscipit, lacus non rutrum ullamcorper, metus lacus iaculis metus, nec iaculis dolor sapien at risus. Aliquam eget sem et felis pharetra ultrices eu vitae turpis. Vestibulum aliquet eros quis orci molestie, vel pretium sapien malesuada. Integer feugiat nisl ut congue rhoncus. Aliquam vitae neque purus. Vivamus quis facilisis eros. Nulla sit amet erat tempus, rutrum diam id, fringilla elit. Curabitur et dolor velit. Nullam at tellus finibus, faucibus ipsum pellentesque, laoreet nisl. Sed vitae ante auctor, posuere massa eu, lacinia quam. Sed venenatis diam sit amet arcu aliquam aliquet id id dolor. Ut mollis sagittis nisi eu facilisis. Maecenas iaculis congue sem, quis ultricies nulla aliquet eu. Mauris cursus justo metus, sed accumsan metus rhoncus vitae.</p>
-                <span><strong>by Author</strong> in <strong>10/12/1994</strong></span>  
-                <div className="Post-footer">                  
+                <p>{ this.props.body }</p>
+                <span>by<strong> { this.props.author }</strong>, { this.formatPostDate(this.props.timestamp) }</span>  
+                <div className="Post-footer">
+                    <Link to={`/postPage/1`} style={{'textDecoration' : 'none', 'color': 'black'}} >     
+                        <FaCommentAlt className="Post-comment-icon"/>
+                    </Link>
+                    <div className="Icon-counter">
+                        { this.props.commentCount }
+                    </div>
                     <FaThumbsUp className="Post-comment-icon" /> 
+                    <FaThumbsDown className="Post-comment-icon"/>  
                     <div className="Icon-counter">
-                        5
-                    </div>      
-                    <FaThumbsDown className="Post-comment-icon"/>
-                    <div className="Icon-counter">
-                        5
-                    </div>                          
+                        { this.props.voteScore }
+                    </div>
+                    {
+                        this.state.canEdit ? <Button name={"Edit"}/> : null
+                    }
+                    <Button name={"Delete"}/>                          
                 </div>
             </div>
         )
     }
+}
+
+Post.propTypes = {
+    canEdit : PropTypes.bool
 }
 
 export default Post
