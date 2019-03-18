@@ -35,8 +35,15 @@ export function handleFetchPostsByCategories(category) {
 
 export function handleFetchPostById(id) {
     return async (dispatch) => {
-        const post = await fetchPostById(id)
+        dispatch(showLoading()) 
+        let post
+        try {
+            post = await fetchPostById(id)
+        }catch(e) {
+            post = {}
+        }         
         dispatch(fetchPostByIdAction(post.data))
+        dispatch(hideLoading())
     }
 }
 

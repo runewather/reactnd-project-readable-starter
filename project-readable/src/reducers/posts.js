@@ -9,7 +9,10 @@ export default function posts (state = {}, action) {
         case FETCH_POSTS:
             return action.posts
         case FETCH_POST_BY_ID: 
-            return action.post
+            return {
+                ...state,
+                ...action.post
+            }
         case FETCH_POSTS_BY_CATEGORIES:
             return action.posts
         default:

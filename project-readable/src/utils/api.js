@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const URL = 'http://localhost:3001'
+const URL = 'https://udacity-readable-runewather.herokuapp.com'
 const AuthenticationHeader = {
     headers: {
         Authorization: 'whatever-you-want',
@@ -21,11 +21,11 @@ export const fetchPostsByCategories = (category) => {
 }
 
 export const fetchPostComments = (id) => {
-    return axios.get(URL + `/posts/${id}/comments`, AuthenticationHeader).then(res => res.data)
+    return axios.get(URL + `/posts/${id}/comments`, AuthenticationHeader)
 }
 
 export const fetchPostCommentById = (id) => {
-    return axios.get(URL + `/comments/${id}`, AuthenticationHeader).then(res => res.data)
+    return axios.get(URL + `/comments/${id}`, AuthenticationHeader)
 }
 
 export const editPostById = (id, data) => {    

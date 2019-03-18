@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
 import Button from '../components/Button'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleFetchCategories } from '../actions/CategoryAction'
 import { handleFetchPostsByCategories } from '../actions/PostActions'
+
+function generateUID () {
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+}
 
 class CategoriesNav extends Component {
 
@@ -17,8 +22,10 @@ class CategoriesNav extends Component {
     generateCategoriesButton = () => {
         if(this.props.categories !== undefined) {
             return this.props.categories.map((cat, index) => {
-                return (                    
-                    <Button key={index} name={cat.name} action={ () => { this.getPostsByCategories(cat.name) }} />
+                return (
+                    <Link key={generateUID()} to={'/'} style={ { textDecoration: 'none', color: 'black'} } >
+                        <Button name={cat.name} action={ () => { this.getPostsByCategories(cat.name) }} />
+                    </Link>                 
                 )
             })
         }
