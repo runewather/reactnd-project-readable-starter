@@ -35,7 +35,7 @@ class PostPage extends Component {
     showPostComments = () => {
         return Object.values(this.props.comments).map((comment) => {
             return (
-                <Comment key={generateUID()} body={comment.body} author={comment.author} />
+                <Comment key={generateUID()} id={comment.id} parentId={comment.parentId} body={comment.body} author={comment.author} />
             )
         })
     }

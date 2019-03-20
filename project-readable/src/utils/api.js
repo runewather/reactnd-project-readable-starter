@@ -33,11 +33,11 @@ export const editPostById = (id, data) => {
 }
 
 export const deletePostById = (id) => {
-    return axios.delete(URL + `/posts/${id}`, AuthenticationHeader).then(res => res.data)
+    return axios.delete(URL + `/posts/${id}`, AuthenticationHeader)
 }
 
 export const deleteCommentById = (id) => {
-    return axios.delete(URL + `/comments/${id}`, AuthenticationHeader).then(res => res.data)
+    return axios.delete(URL + `/comments/${id}`, AuthenticationHeader)
 }
 
 export const addPost = (data) => {

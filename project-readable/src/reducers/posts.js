@@ -7,14 +7,11 @@ import {
 export default function posts (state = {}, action) {
     switch (action.type) {
         case FETCH_POSTS:
-            return action.posts
+            return action.posts.filter((post) => { return post.deleted === false })
         case FETCH_POST_BY_ID: 
-            return {
-                ...state,
-                ...action.post
-            }
+            return action.post.deleted === false ? action.post : {}  
         case FETCH_POSTS_BY_CATEGORIES:
-            return action.posts
+            return action.posts.filter((post) => { return post.deleted === false })
         default:
             return state
     }

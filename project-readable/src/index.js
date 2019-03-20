@@ -5,9 +5,9 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import ReactDOM from 'react-dom'
 import App from './App'
-import posts from './reducers/posts'
-import categories from './reducers/category'
-import comments from './reducers/comment'
+import posts from './reducers/Posts'
+import categories from './reducers/Category'
+import comments from './reducers/Comment'
 
 const store = createStore(combineReducers({posts, categories, comments, loadingBar: loadingBarReducer}), applyMiddleware(thunk))
 

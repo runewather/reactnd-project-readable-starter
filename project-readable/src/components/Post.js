@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { FaThumbsUp } from 'react-icons/fa'
 import { FaThumbsDown } from 'react-icons/fa'
 import { FaCommentAlt } from 'react-icons/fa'
 import Button from './Button'
+import { handleDeletePostById } from '../actions/PostActions'
 import './Post.css'
 
 class Post extends Component {
@@ -19,7 +21,11 @@ class Post extends Component {
     formatPostDate = (timestamp) => {
         let date = new Date(timestamp) 
         return date.toLocaleDateString() + " " + date.toLocaleTimeString()
-    } 
+    }
+    
+    deletePost = () => {
+        this.props.dispatch(handleDeletePostById(this.props.id) )      
+    }
 
     render() {      
         return (
@@ -46,7 +52,7 @@ class Post extends Component {
                     {
                         this.state.canEdit ? <Button name={"Edit"}/> : null
                     }
-                    <Button name={"Delete"}/>                          
+                    <Button name={"Delete"} action={this.deletePost} />                          
                 </div>
             </div>
         )
@@ -57,4 +63,8 @@ Post.propTypes = {
     canEdit : PropTypes.bool
 }
 
-export default Post
+const mapStateToProps = state => ({
+    
+})
+
+export default connect(mapStateToProps)(Post)

@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { FaThumbsUp } from 'react-icons/fa'
 import { FaThumbsDown } from 'react-icons/fa'
 import AddEditComment from './AddEditComment'
+import { connect } from 'react-redux'
+import { handleDeletePostComment } from '../actions/CommentActions'
 import './Comment.css'
 import Button from './Button';
 
@@ -12,6 +14,10 @@ class Comment extends Component {
         this.state = {
             canEdit : false
         }
+    }
+
+    deleteComment = () => {
+        this.props.dispatch(handleDeletePostComment(this.props.id, this.props.parentId))
     }
 
     render() {
@@ -29,7 +35,7 @@ class Comment extends Component {
                         5
                     </div> 
                     <Button name={'Edit'} action={() => { this.setState({ canEdit : !this.state.canEdit }) }} />
-                    <Button name={'Delete'} />
+                    <Button name={'Delete'} action={ this.deleteComment } />
                 </div>
                 { this.state.canEdit ? <AddEditComment /> : null }                
             </Fragment>
@@ -37,4 +43,4 @@ class Comment extends Component {
     }
 }
 
-export default Comment
+export default connect(() => { return {} })(Comment)
