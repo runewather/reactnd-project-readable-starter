@@ -20,7 +20,7 @@ class CategoriesNav extends Component {
     }
 
     generateCategoriesButton = () => {
-        if(this.props.categories !== undefined) {
+        if(Object.keys(this.props.categories).length > 0) {
             return this.props.categories.map((cat, index) => {
                 return (
                     <Link key={generateUID()} to={'/' + cat.name} style={ { textDecoration: 'none', color: 'black'} } >
@@ -42,7 +42,7 @@ class CategoriesNav extends Component {
 }
 
 const mapStateToProps = state => ({
-    ...state.categories
+    ...state
 })
 
 export default connect(mapStateToProps)(CategoriesNav)

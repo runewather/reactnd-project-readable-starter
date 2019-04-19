@@ -44,8 +44,8 @@ class Post extends Component {
                     <div className="Icon-counter">
                         { this.props.commentCount }
                     </div>
-                    <FaThumbsUp onClick={() => { this.props.dispatch(handleVotePost(this.props.id, { option: 'upVote'})) }} className="Post-comment-icon" /> 
-                    <FaThumbsDown onClick={() => { this.props.dispatch(handleVotePost(this.props.id, { option: 'downVote'})) }} className="Post-comment-icon"/>  
+                    <FaThumbsUp onClick={() => { this.props.dispatch(handleVotePost(this.props.id, { option: 'upVote'}, this.props.isSinglePage)) }} className="Post-comment-icon" /> 
+                    <FaThumbsDown onClick={() => { this.props.dispatch(handleVotePost(this.props.id, { option: 'downVote'}, this.props.isSinglePage)) }} className="Post-comment-icon"/>  
                     <div className="Icon-counter">
                         { this.props.voteScore }
                     </div>

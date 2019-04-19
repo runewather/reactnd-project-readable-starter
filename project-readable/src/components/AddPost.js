@@ -1,8 +1,22 @@
 import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux'
 import Button from './Button'
+import { handleFetchCategories } from '../actions/CategoryAction'
 import './AddPost.css'
 
 class AddPost extends Component {
+    componentDidMount() {
+        this.props.dispatch(handleFetchCategories())
+    }
+
+    showCategoriesOptions = () => {
+        if(Object.keys(this.props.categories).length > 0) {
+            return Object.keys(this.props.categories).map((c) => {
+                return (<option key={this.props.categories[c].name} value={this.props.categories[c].name}>{this.props.categories[c].name}</option>)
+            })
+        }        
+    }
+
     render() {
         return (
             <Fragment>
@@ -14,10 +28,7 @@ class AddPost extends Component {
                 <textarea style={{ 'marginBottom' : '15px' }} rows="4" cols="50" className="Post-input" />
                 <h3 style={{ 'marginBottom' : '15px', 'marginTop' : '0px' }} className="Post-title">Category</h3>
                 <select style={{ 'marginBottom' : '15px', 'marginTop' : '0px' }} name="cars">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="fiat">Fiat</option>
-                    <option value="audi">Audi</option>
+                    { this.showCategoriesOptions() }
                 </select>
                 <Button name={'Submit'} />
             </Fragment>
@@ -25,4 +36,10 @@ class AddPost extends Component {
     }
 }
 
-export default AddPost
+const mapStateToProps = state => ({
+    categories : {
+      ...state.categories
+    }
+})
+
+export default connect(mapStateToProps)(AddPost)

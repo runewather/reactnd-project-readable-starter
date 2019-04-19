@@ -21,7 +21,7 @@ class PostList extends Component {
 
     componentDidMount() {
         const { category } = this.props.match.params
-        if(!category) {
+        if(!category) {            
             this.props.dispatch(handleFetchPosts())
         } 
     }
@@ -39,6 +39,7 @@ class PostList extends Component {
         }).map((post) => {
             return (
                 <Post key={generateUID()} 
+                isSinglePage={false}
                 id={post.id}
                 title={post.title} 
                 author={post.author} 

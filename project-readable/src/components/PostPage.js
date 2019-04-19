@@ -59,6 +59,7 @@ class PostPage extends Component {
                 {
                     Object.keys(this.props.posts).length > 0 ? 
                     <Post key={generateUID()} 
+                    isSinglePage={true}
                     id={post.id}
                     title={post.title} 
                     author={post.author} 

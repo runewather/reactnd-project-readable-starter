@@ -26,10 +26,14 @@ function fetchPostByIdAction(post) {
     }
 }
 
-export function handleVotePost(id, option) {
+export function handleVotePost(id, option, isSinglePage) {
     return async (dispatch) => {
         await votePostById(id, option)
-              
+        if(isSinglePage) {            
+            dispatch(handleFetchPostById(id))
+        } else {
+            dispatch(handleFetchPosts())
+        } 
     }
 }
 
@@ -55,9 +59,14 @@ export function handleFetchPostById(id) {
         try {
             post = await fetchPostById(id)
         }catch(e) {
-            post = {}
+            post = { deleted: true }
         }         
-        dispatch(fetchPostByIdAction(post.data))
+        if(post.data !== undefined ) {
+            dispatch(fetchPostByIdAction(post.data))
+        } else {
+            post.data = { deleted: true }
+            dispatch(fetchPostByIdAction(post.data))
+        }        
         dispatch(hideLoading())
     }
 }

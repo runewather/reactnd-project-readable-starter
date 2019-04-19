@@ -7,7 +7,7 @@ class AddPostButton extends Component {
     render() {
         return (
             <Fragment>
-                <Link to={'/addPost'} style={ { textDecoration: 'none', color: 'black'} } >
+                <Link to={'/post/add'} style={ { textDecoration: 'none', color: 'black'} } >
                     <FaPlusCircle className='Add-post-button' />
                 </Link>
             </Fragment>
