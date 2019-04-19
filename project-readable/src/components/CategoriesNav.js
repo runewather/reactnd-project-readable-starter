@@ -23,7 +23,7 @@ class CategoriesNav extends Component {
         if(this.props.categories !== undefined) {
             return this.props.categories.map((cat, index) => {
                 return (
-                    <Link key={generateUID()} to={'/'} style={ { textDecoration: 'none', color: 'black'} } >
+                    <Link key={generateUID()} to={'/' + cat.name} style={ { textDecoration: 'none', color: 'black'} } >
                         <Button name={cat.name} action={ () => { this.getPostsByCategories(cat.name) }} />
                     </Link>                 
                 )

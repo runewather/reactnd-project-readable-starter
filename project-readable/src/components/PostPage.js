@@ -53,11 +53,11 @@ class PostPage extends Component {
     }
 
     render() {
-        const post  = this.props.post
+        const post  = this.props.posts
         return (
             <div style={ { width : '100%' } }>                
                 {
-                    Object.keys(this.props.post).length > 0 ? 
+                    Object.keys(this.props.posts).length > 0 ? 
                     <Post key={generateUID()} 
                     id={post.id}
                     title={post.title} 
@@ -86,7 +86,7 @@ class PostPage extends Component {
 }
 
 const mapStateToProps = state => ({
-    post : {
+    posts : {
       ...state.posts
     },
     comments : {

@@ -29,6 +29,7 @@ class App extends Component {
             </header>            
             <div className="Wrapper">
               <Route exact path='/' component={PostList} />
+              <Route exact path='/:category' component={PostList} />
               <Route exact path='/addPost' component={AddPost} />
               <Route exact path='/postPage/:id' component={PostPage} />             
             </div>            

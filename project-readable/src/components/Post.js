@@ -6,7 +6,7 @@ import { FaThumbsUp } from 'react-icons/fa'
 import { FaThumbsDown } from 'react-icons/fa'
 import { FaCommentAlt } from 'react-icons/fa'
 import Button from './Button'
-import { handleDeletePostById } from '../actions/PostActions'
+import { handleDeletePostById, handleVotePost } from '../actions/PostActions'
 import './Post.css'
 
 class Post extends Component {
@@ -38,14 +38,14 @@ class Post extends Component {
                 <p>{ this.props.body }</p>
                 <span>by<strong> { this.props.author }</strong>, { this.formatPostDate(this.props.timestamp) }</span>  
                 <div className="Post-footer">
-                    <Link to={`/postPage/1`} style={{'textDecoration' : 'none', 'color': 'black'}} >     
+                    <Link to={`/postPage/${this.props.id}`} style={{'textDecoration' : 'none', 'color': 'black'}} >     
                         <FaCommentAlt className="Post-comment-icon"/>
                     </Link>
                     <div className="Icon-counter">
                         { this.props.commentCount }
                     </div>
-                    <FaThumbsUp className="Post-comment-icon" /> 
-                    <FaThumbsDown className="Post-comment-icon"/>  
+                    <FaThumbsUp onClick={() => { this.props.dispatch(handleVotePost(this.props.id, { option: 'upVote'})) }} className="Post-comment-icon" /> 
+                    <FaThumbsDown onClick={() => { this.props.dispatch(handleVotePost(this.props.id, { option: 'downVote'})) }} className="Post-comment-icon"/>  
                     <div className="Icon-counter">
                         { this.props.voteScore }
                     </div>

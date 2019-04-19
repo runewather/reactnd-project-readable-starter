@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import Post from './Post'
-import { handleFetchPosts } from '../actions/PostActions';
+import { handleFetchPosts } from '../actions/PostActions'
 
 const SORT_DATE = 'DATE'
 const SORT_VOTES = 'VOTES'
@@ -11,7 +11,6 @@ function generateUID () {
 }
 
 class PostList extends Component {
-
     constructor(props) {
         super(props)
 
@@ -21,7 +20,10 @@ class PostList extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(handleFetchPosts())
+        const { category } = this.props.match.params
+        if(!category) {
+            this.props.dispatch(handleFetchPosts())
+        } 
     }
 
     showPostList = () => {
