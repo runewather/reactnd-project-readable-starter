@@ -35,7 +35,7 @@ class PostPage extends Component {
     showPostComments = () => {
         return Object.values(this.props.comments).map((comment) => {
             return (
-                <Comment key={generateUID()} id={comment.id} parentId={comment.parentId} body={comment.body} author={comment.author} />
+                <Comment key={generateUID()} id={comment.id} parentId={comment.parentId} body={comment.body} author={comment.author} voteScore={comment.voteScore} timestamp={comment.timestamp} />
             )
         })
     }
@@ -66,7 +66,10 @@ class PostPage extends Component {
                     body={post.body} 
                     voteScore={post.voteScore}
                     timestamp={post.timestamp}
-                    commentCount={post.commentCount} />
+                    category={post.category}
+                    commentCount={post.commentCount}
+                    canEdit={true}
+                    canDelete={true} />
                     : <h3 style={ { textAlign : 'center' }}> 404 PAGE NOT FOUND </h3>
                 }
                 <h3 className="Title">Comments</h3>
@@ -77,7 +80,7 @@ class PostPage extends Component {
                     }                    
                 </div>   
                 {
-                    this.state.showCommentForm ? <AddEditComment /> : null
+                    this.state.showCommentForm ? <AddEditComment id={this.props.posts.id} /> : null
                 }                            
                 { Object.keys(this.props.comments).length > 0 ? 
                 this.showPostComments() : <h3 style={ { textAlign : 'center' }}>No Comments</h3> }

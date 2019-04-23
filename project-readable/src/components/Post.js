@@ -10,13 +10,6 @@ import { handleDeletePostById, handleVotePost } from '../actions/PostActions'
 import './Post.css'
 
 class Post extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            canEdit : false
-        }
-    }
 
     formatPostDate = (timestamp) => {
         let date = new Date(timestamp) 
@@ -31,14 +24,14 @@ class Post extends Component {
         return (
             <div className="Post">
                 <div className="Post-header">
-                    <Link to={`/postPage/${this.props.id}`} style={{'textDecoration' : 'none', 'color': 'black'}} >
+                    <Link to={`/posts/${this.props.category}/${this.props.id}`} style={{'textDecoration' : 'none', 'color': 'black'}} >
                         <h3 className="Post-title">{ this.props.title }</h3>
                     </Link>                  
                 </div>                
                 <p>{ this.props.body }</p>
                 <span>by<strong> { this.props.author }</strong>, { this.formatPostDate(this.props.timestamp) }</span>  
                 <div className="Post-footer">
-                    <Link to={`/postPage/${this.props.id}`} style={{'textDecoration' : 'none', 'color': 'black'}} >     
+                    <Link to={`/posts/${this.props.category}/${this.props.id}`} style={{'textDecoration' : 'none', 'color': 'black'}} >     
                         <FaCommentAlt className="Post-comment-icon"/>
                     </Link>
                     <div className="Icon-counter">
@@ -50,9 +43,11 @@ class Post extends Component {
                         { this.props.voteScore }
                     </div>
                     {
-                        this.state.canEdit ? <Button name={"Edit"}/> : null
+                        this.props.canEdit ? <Button name={"Edit"}/> : null
                     }
-                    <Button name={"Delete"} action={this.deletePost} />                          
+                    {
+                        this.props.canDelete ? <Link to={'/'} style={{'textDecoration' : 'none', 'color': 'black'}}><Button name={"Delete"} action={this.deletePost} /></Link>  : null
+                    }                                             
                 </div>
             </div>
         )

@@ -3,7 +3,7 @@ import { FaThumbsUp } from 'react-icons/fa'
 import { FaThumbsDown } from 'react-icons/fa'
 import AddEditComment from './AddEditComment'
 import { connect } from 'react-redux'
-import { handleDeletePostComment } from '../actions/CommentActions'
+import { handleDeletePostComment, handleVoteComment } from '../actions/CommentActions'
 import './Comment.css'
 import Button from './Button';
 
@@ -16,6 +16,11 @@ class Comment extends Component {
         }
     }
 
+    formatPostDate = (timestamp) => {
+        let date = new Date(timestamp) 
+        return date.toLocaleDateString() + " " + date.toLocaleTimeString()
+    }
+
     deleteComment = () => {
         this.props.dispatch(handleDeletePostComment(this.props.id, this.props.parentId))
     }
@@ -25,14 +30,11 @@ class Comment extends Component {
             <Fragment>
                 <div className="Comment">
                     <p>{ this.props.body }</p>
-                    <span style={{ 'display' : 'block' }}>by <strong>{ this.props.author }</strong></span>
-                    <FaThumbsUp className="Post-comment-icon" /> 
+                    <span style={{ 'display' : 'block' }}>by <strong>{ this.props.author }</strong>, { this.formatPostDate(this.props.timestamp) }</span>
+                    <FaThumbsUp onClick={() => { this.props.dispatch(handleVoteComment( this.props.parentId, this.props.id, { option: 'upVote'})) }} className="Post-comment-icon" />      
+                    <FaThumbsDown onClick={() => { this.props.dispatch(handleVoteComment( this.props.parentId, this.props.id, { option: 'downVote'})) }} className="Post-comment-icon"/>
                     <div className="Icon-counter">
-                        5
-                    </div>      
-                    <FaThumbsDown className="Post-comment-icon"/>
-                    <div className="Icon-counter">
-                        5
+                        { this.props.voteScore }
                     </div> 
                     <Button name={'Edit'} action={() => { this.setState({ canEdit : !this.state.canEdit }) }} />
                     <Button name={'Delete'} action={ this.deleteComment } />

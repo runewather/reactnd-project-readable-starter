@@ -8,10 +8,10 @@ import CategoriesNav from './components/CategoriesNav'
 import LoadingBar from 'react-redux-loading'
 import { connect } from 'react-redux'
 import { handleFetchPosts } from './actions/PostActions'
-
+ 
 import './App.css'
 import './Normalize.css'
-
+ 
 class App extends Component {  
   render() {  
     return (
@@ -19,19 +19,19 @@ class App extends Component {
         <Fragment>
             <AddPostButton />
             <LoadingBar />
-          <div className="App">                               
+          <div className="App">                              
             <header className="App-header">              
-              <Link to={'/'} onClick={ () => { this.props.dispatch(handleFetchPosts()) } } 
+              <Link to={'/'} onClick={ () => { this.props.dispatch(handleFetchPosts()) } }
               style={ { textDecoration: 'none', color: 'black'} }>
-                <h1 className="Title">React Blog</h1>   
+                <h1 className="Title">React Blog</h1>  
               </Link>    
               <CategoriesNav />
             </header>            
             <div className="Wrapper">
               <Route exact path='/' component={PostList} />
-              <Route exact path='/:category' component={PostList} />
-              <Route exact path='/post/add' component={AddPost} />              
-              <Route exact path='/postPage/:id' component={PostPage} />             
+              <Route exact path='/addPost' component={AddPost} />
+              <Route exact path='/posts/:category' component={PostList} />                            
+              <Route exact path='/posts/:category/:id' component={PostPage} />            
             </div>            
           </div>
         </Fragment>          
@@ -39,9 +39,9 @@ class App extends Component {
     )
   }
 }
-
+ 
 const mapStateToProps = state => ({
   ...state
 })
-
+ 
 export default connect(mapStateToProps)(App);

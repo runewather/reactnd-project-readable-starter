@@ -41,7 +41,7 @@ export const deleteCommentById = (id) => {
 }
 
 export const addPost = (data) => {
-    return axios.post(URL + `/posts`, data, AuthenticationHeader).then(res => res.data)
+    return axios.post(URL + `/posts`, data, AuthenticationHeader)
 }
 
 export const addPostComment = (data) => {
@@ -53,7 +53,7 @@ export const editPostComment = (id, data) => {
 }
 
 export const voteCommentById = (id, data) => {
-    return axios.post(URL + `/comments/${id}`, data, AuthenticationHeader).then(res => res.data)
+    return axios.post(URL + `/comments/${id}`, data, AuthenticationHeader)
 }
 
 export const votePostById = (id, data) => {

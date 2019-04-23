@@ -45,6 +45,7 @@ class PostList extends Component {
                 author={post.author} 
                 body={post.body} 
                 voteScore={post.voteScore}
+                category={post.category}
                 timestamp={post.timestamp}
                 commentCount={post.commentCount} />
             )
