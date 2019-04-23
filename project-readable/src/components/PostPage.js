@@ -3,6 +3,7 @@ import Post from './Post'
 import Button from './Button'
 import Comment from './Comment'
 import AddEditComment from './AddEditComment'
+import EditPost from './EditPost'
 import { handleFetchPostById } from '../actions/PostActions'
 import { handleFetchPostComments } from '../actions/CommentActions'
 import { connect } from 'react-redux'
@@ -21,7 +22,8 @@ class PostPage extends Component {
         super(props)        
 
         this.state = {
-            showCommentForm : false
+            showCommentForm : false,
+            showPostForm: false
         }
     }
 
@@ -52,8 +54,20 @@ class PostPage extends Component {
         })
     }
 
+    showPostForm = () => {        
+        this.setState({
+            showPostForm : true
+        })        
+    }
+
+    hidePostForm = () => {
+        this.setState({
+            showPostForm : false
+        })
+    }
+
     render() {
-        const post  = this.props.posts
+        const post = this.props.posts
         return (
             <div style={ { width : '100%' } }>                
                 {
@@ -72,6 +86,15 @@ class PostPage extends Component {
                     canDelete={true} />
                     : <h3 style={ { textAlign : 'center' }}> 404 PAGE NOT FOUND </h3>
                 }
+                <div style={style}>
+                    {
+                        this.state.showPostForm === false ? <Button name={'Edit'} action={this.showPostForm} /> 
+                        : <Button name={'Hide'} action={this.hidePostForm}/>
+                    }                    
+                </div>
+                {
+                    this.state.showPostForm ? <EditPost id={post.id} title={post.title} body={post.body} /> : null
+                }  
                 <h3 className="Title">Comments</h3>
                 <div style={style}>
                     {
@@ -80,7 +103,7 @@ class PostPage extends Component {
                     }                    
                 </div>   
                 {
-                    this.state.showCommentForm ? <AddEditComment id={this.props.posts.id} /> : null
+                    this.state.showCommentForm ? <AddEditComment isEdit={false} id={this.props.posts.id} /> : null
                 }                            
                 { Object.keys(this.props.comments).length > 0 ? 
                 this.showPostComments() : <h3 style={ { textAlign : 'center' }}>No Comments</h3> }

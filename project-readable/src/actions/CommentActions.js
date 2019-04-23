@@ -1,4 +1,5 @@
-import { fetchPostComments, deleteCommentById, addPostComment, voteCommentById } from '../utils/api'
+import { fetchPostCommentById, fetchPostComments, deleteCommentById, addPostComment, voteCommentById, editPostComment } from '../utils/api'
+import { async } from 'q';
 
 export const FETCH_COMMENTS = 'FETCH_COMMENTS'
 export const FETCH_COMMENT_BY_ID = 'FETCH_COMMENT_BY_ID'
@@ -29,6 +30,13 @@ export function handleFetchPostComments(id) {
     return async (dispatch) => {
         const comments = await fetchPostComments(id)
         dispatch(fetchPostCommentsAction(comments.data))
+    }
+}
+
+export function handleUpdateComment(postId, commentId, data) {
+    return async (dispatch) => {
+        await editPostComment(commentId, data)
+        dispatch(handleFetchPostComments(postId))
     }
 }
 

@@ -6,6 +6,10 @@ import { handleAddNewPost } from '../actions/PostActions'
 import { handleFetchCategories } from '../actions/CategoryAction'
 import './AddPost.css'
 
+function generateUID () {
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+}
+
 class AddPost extends Component {
     
     state = {
@@ -38,6 +42,7 @@ class AddPost extends Component {
     
     addNewPost = () => {
         let newPost = this.state    
+        newPost.id = this.props.id ? this.props.id : generateUID()
         newPost.category = this.selectRef.current.value
         newPost.timestamp = new Date().getTime()  
         this.props.dispatch(handleAddNewPost(newPost))        

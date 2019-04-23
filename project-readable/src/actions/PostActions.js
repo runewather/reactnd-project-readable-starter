@@ -1,4 +1,4 @@
-import { fetchPosts, fetchPostsByCategories, fetchPostById, deletePostById, votePostById, addPost } from '../utils/api'
+import { fetchPosts, fetchPostsByCategories, fetchPostById, deletePostById, votePostById, addPost, editPostById } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
 export const FETCH_POSTS = 'FETCH_POSTS'
@@ -75,6 +75,13 @@ export function handleFetchPostById(id) {
             dispatch(fetchPostByIdAction(post.data))
         }        
         dispatch(hideLoading())
+    }
+}
+
+export function handleUpdatePost(id, data) {
+    return async (dispatch) => {
+        await editPostById(id, data)
+        dispatch(handleFetchPostById(id))
     }
 }
 

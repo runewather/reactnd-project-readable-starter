@@ -43,9 +43,6 @@ class Post extends Component {
                         { this.props.voteScore }
                     </div>
                     {
-                        this.props.canEdit ? <Button name={"Edit"}/> : null
-                    }
-                    {
                         this.props.canDelete ? <Link to={'/'} style={{'textDecoration' : 'none', 'color': 'black'}}><Button name={"Delete"} action={this.deletePost} /></Link>  : null
                     }                                             
                 </div>

@@ -29,7 +29,7 @@ export const fetchPostCommentById = (id) => {
 }
 
 export const editPostById = (id, data) => {    
-    return axios.put(URL + `/posts/${id}`, data, AuthenticationHeader).then(res => res.data)
+    return axios.put(URL + `/posts/${id}`, data, AuthenticationHeader)
 }
 
 export const deletePostById = (id) => {
@@ -49,7 +49,7 @@ export const addPostComment = (data) => {
 }
 
 export const editPostComment = (id, data) => {
-    return axios.put(URL + `/comments/${id}`, data, AuthenticationHeader).then(res => res.data)
+    return axios.put(URL + `/comments/${id}`, data, AuthenticationHeader)
 }
 
 export const voteCommentById = (id, data) => {

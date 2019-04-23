@@ -39,7 +39,7 @@ class Comment extends Component {
                     <Button name={'Edit'} action={() => { this.setState({ canEdit : !this.state.canEdit }) }} />
                     <Button name={'Delete'} action={ this.deleteComment } />
                 </div>
-                { this.state.canEdit ? <AddEditComment /> : null }                
+                { this.state.canEdit ? <AddEditComment isEdit={true} id={this.props.id} parentId={this.props.parentId} body={this.props.body} /> : null }                
             </Fragment>
         )
     }

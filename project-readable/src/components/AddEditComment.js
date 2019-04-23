@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Button from './Button'
 import { connect } from 'react-redux'
-import { handleAddComment } from '../actions/CommentActions'
+import { handleUpdateComment, handleAddComment } from '../actions/CommentActions'
 import './AddComment.css'
 
 function generateUID () {
@@ -10,9 +10,12 @@ function generateUID () {
 
 class AddEditComment extends Component {
 
-    state = {
-        body : '',
-        author: ''
+    constructor(props) {
+        super(props);
+        this.state = {
+            id: props.id,
+            body: props.body
+        }
     }
 
     handleInput = (evt) => {
@@ -32,14 +35,26 @@ class AddEditComment extends Component {
         this.props.dispatch(handleAddComment(this.props.id, comment))
     }
 
+    updateComment = () => {
+        let comment = this.state       
+        comment.timestamp = new Date().getTime()    
+        this.props.dispatch(handleUpdateComment(this.props.parentId, this.props.id, comment))
+    }
+
     render() {
         return (
             <div className="Add-comment">
-                <h4>Author</h4>
-                <input name="author" value={this.state.author} onChange={this.handleInput} type="text"></input>
+                {
+                    !this.props.isEdit ? 
+                    <Fragment>
+                        <h4>Author</h4>
+                        <input name="author" value={this.state.author} onChange={this.handleInput} type="text"></input> 
+                    </Fragment>
+                    : null
+                }                
                 <h4>Body</h4>
                 <textarea name="body" value={this.state.body} onChange={this.handleInput} rows="3" cols="80" style={{marginBottom: '15px'}}></textarea>
-                <Button name={'Comment'} action={this.addNewComment} />
+                <Button name={this.props.isEdit ? 'Update' : 'Comment'} action={this.props.isEdit ? this.updateComment : this.addNewComment} />
             </div>
         )
     }
