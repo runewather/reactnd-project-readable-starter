@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import Button from './Button'
 import { connect } from 'react-redux'
 import { handleUpdateComment, handleAddComment } from '../actions/CommentActions'
+import { handleFetchPostById } from '../actions/PostActions'
 import './AddComment.css'
 
 function generateUID () {
@@ -33,6 +34,7 @@ class AddEditComment extends Component {
         comment.voteScore = 1
         comment.deleted = false    
         this.props.dispatch(handleAddComment(this.props.id, comment))
+        this.props.dispatch(handleFetchPostById(this.props.id))
     }
 
     updateComment = () => {

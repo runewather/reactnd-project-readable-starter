@@ -4,6 +4,7 @@ import { FaThumbsDown } from 'react-icons/fa'
 import AddEditComment from './AddEditComment'
 import { connect } from 'react-redux'
 import { handleDeletePostComment, handleVoteComment } from '../actions/CommentActions'
+import { handleFetchPostById } from '../actions/PostActions'
 import './Comment.css'
 import Button from './Button';
 
@@ -21,8 +22,9 @@ class Comment extends Component {
         return date.toLocaleDateString() + " " + date.toLocaleTimeString()
     }
 
-    deleteComment = () => {
-        this.props.dispatch(handleDeletePostComment(this.props.id, this.props.parentId))
+    deleteComment = async () => {
+        await this.props.dispatch(handleDeletePostComment(this.props.id, this.props.parentId))
+        await this.props.dispatch(handleFetchPostById(this.props.parentId))
     }
 
     render() {

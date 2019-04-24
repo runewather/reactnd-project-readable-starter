@@ -1,5 +1,4 @@
-import { fetchPostCommentById, fetchPostComments, deleteCommentById, addPostComment, voteCommentById, editPostComment } from '../utils/api'
-import { async } from 'q';
+import { fetchPostComments, deleteCommentById, addPostComment, voteCommentById, editPostComment } from '../utils/api'
 
 export const FETCH_COMMENTS = 'FETCH_COMMENTS'
 export const FETCH_COMMENT_BY_ID = 'FETCH_COMMENT_BY_ID'

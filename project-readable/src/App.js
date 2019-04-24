@@ -30,8 +30,8 @@ class App extends Component {
             <div className="Wrapper">
               <Route exact path='/' component={PostList} />
               <Route exact path='/addPost' component={AddPost} />
-              <Route exact path='/posts/:category' component={PostList} />                            
-              <Route exact path='/posts/:category/:id' component={PostPage} />            
+              <Route exact path='/:category' component={PostList} />                            
+              <Route exact path='/:category/:id' component={PostPage} />            
             </div>            
           </div>
         </Fragment>          

@@ -24,14 +24,14 @@ class Post extends Component {
         return (
             <div className="Post">
                 <div className="Post-header">
-                    <Link to={`/posts/${this.props.category}/${this.props.id}`} style={{'textDecoration' : 'none', 'color': 'black'}} >
+                    <Link to={`/${this.props.category}/${this.props.id}`} style={{'textDecoration' : 'none', 'color': 'black'}} >
                         <h3 className="Post-title">{ this.props.title }</h3>
                     </Link>                  
                 </div>                
                 <p>{ this.props.body }</p>
                 <span>by<strong> { this.props.author }</strong>, { this.formatPostDate(this.props.timestamp) }</span>  
                 <div className="Post-footer">
-                    <Link to={`/posts/${this.props.category}/${this.props.id}`} style={{'textDecoration' : 'none', 'color': 'black'}} >     
+                    <Link to={`/${this.props.category}/${this.props.id}`} style={{'textDecoration' : 'none', 'color': 'black'}} >     
                         <FaCommentAlt className="Post-comment-icon"/>
                     </Link>
                     <div className="Icon-counter">
